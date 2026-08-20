@@ -1,0 +1,9 @@
+metric,value
+checkpoint_epoch,69
+checkpoint_val_loss,4.071597277652472
+test_samples,40
+valid_count,13859072
+R,0.9710925827273571
+R2,0.9404977114898425
+MAE,2.4651067898010197
+RMSE,4.294318584078076

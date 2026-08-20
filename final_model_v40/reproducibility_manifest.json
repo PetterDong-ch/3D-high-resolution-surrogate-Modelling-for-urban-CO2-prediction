@@ -1,0 +1,28 @@
+{
+  "package": "final_model_v40",
+  "release": "1.1.0-reproducible",
+  "python": "3.12.3",
+  "seed": 42,
+  "checkpoints": {
+    "checkpoints/best_model.pt": "38d5e9fc62b37b3f0ecf49df68e792032d5d3796bbd1408b5e93f5ce5bf1b865",
+    "checkpoints/v38_initialization.pt": "71df80ed73e456d865e4498f64172def5c498f4eb9988e0fb5963838dda16d94"
+  },
+  "expected_report_evaluation": {
+    "samples": 40,
+    "valid_count": 13859072,
+    "R": 0.9710925827273571,
+    "R2": 0.9404977114898425,
+    "MAE_ppm": 2.4651067898010197,
+    "RMSE_ppm": 4.294318584078076
+  },
+  "external_data_entries": [
+    "raw/JOBS",
+    "patch_cache_v33_camden_z001_010_no1112/train/manifest.json",
+    "patch_cache_v33_camden_z001_010_no1112/val/manifest.json",
+    "v33_context_sidecar_camden_z001_010_no1112/normalization.json",
+    "v33_previous_co2_sidecar_camden_z001_010_no1112/normalization.json",
+    "coordinate_sidecar_v33_camden_z001_010_no1112/train_metadata.npz",
+    "coordinate_sidecar_v33_camden_z001_010_no1112/val_metadata.npz",
+    "v33_texture_sidecar_camden_z001_010_no1112/train_texture_stats.npz"
+  ]
+}

@@ -1,0 +1,9 @@
+runs/
+evaluations/
+logs/
+__pycache__/
+*.pyc
+.venv/
+external_data/
+generated/
+*.tmp

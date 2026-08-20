@@ -1,0 +1,85 @@
+{
+  "name": "final_model_twostage_v6",
+  "purpose": "Two-stage surrogate: Stage1 predicts PALM-resolved meteorology; Stage2 predicts autoregressive CO2 increment using a V40-style contextual event-texture 3D U-Net.",
+  "stage1": {
+    "class": "LocalFNOStage1",
+    "checkpoint": "checkpoints/stage1_local_fno_best_model.pt",
+    "inputs": {
+      "geometry_channels": 5,
+      "surface_channels": 8,
+      "profile_channels": 6,
+      "scalar_channels": 4
+    },
+    "architecture": {
+      "width": 32,
+      "depth": 4,
+      "modes_z": 8,
+      "modes_y": 16,
+      "modes_x": 16,
+      "predict_w": true,
+      "output_pressure": false
+    },
+    "outputs_used_by_stage2": ["u", "v", "w", "theta"]
+  },
+  "stage2": {
+    "class": "V40EventTextureContextUNet3D",
+    "checkpoint": "checkpoints/stage2_best_model.pt",
+    "local_input_shape": [18, 16, 256, 256],
+    "global_context_shape": [9, 16, 80, 80],
+    "output_shape": [1, 16, 256, 256],
+    "architecture": {
+      "base_channels": 32,
+      "global_feature_channels": 8,
+      "context_correction_scale": 1.0,
+      "high_delta_scale": 1.0,
+      "min_high_gate": 0.2
+    },
+    "local_channels": [
+      "emission_values",
+      "ls_forcing_right_CO2",
+      "u",
+      "v",
+      "p",
+      "theta",
+      "w",
+      "month_sin",
+      "month_cos",
+      "tod_sin",
+      "tod_cos",
+      "x_norm",
+      "y_norm",
+      "z_norm",
+      "prev_kc_CO2",
+      "prev_dCdx",
+      "prev_dCdy",
+      "prev_dCdz"
+    ],
+    "global_channels": [
+      "emission_values",
+      "ls_forcing_right_CO2",
+      "u",
+      "v",
+      "w",
+      "p",
+      "theta",
+      "fluid_mask",
+      "prev_kc_CO2"
+    ],
+    "target": "delta_CO2 = kc_CO2(t) - kc_CO2(t-1)",
+    "reconstruction": "pred_CO2(t) = kc_CO2(t-1) + pred_delta_CO2"
+  },
+  "saved_metrics": {
+    "direct": {
+      "R": 0.9590264777823825,
+      "R2": 0.9196815817291155,
+      "MAE": 1.8309752356109097,
+      "RMSE": 3.3334650484843826
+    },
+    "delta": {
+      "R": 0.5881053768023363,
+      "R2": 0.33671629509653966,
+      "MAE": 1.8309752360842442,
+      "RMSE": 3.3334650488698667
+    }
+  }
+}

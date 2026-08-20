@@ -1,0 +1,10 @@
+runs/
+evaluations/
+logs/
+sidecars/
+__pycache__/
+*.pyc
+.venv/
+external_data/
+generated/
+*.tmp

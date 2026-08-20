@@ -1,0 +1,320 @@
+Using patch cache: /data/cd25/isolated_runs_V33/3D_UNet_pft/processed/patch_cache_v33_camden_z001_010_no1112
+Dataset ready: train_samples=16384 val_samples=2048 patch=(16, 256, 256)
+Training target mode: V22 previous-CO2 autoregressive delta CO2 = kc_CO2(t)-kc_CO2(t-1) on global z=1-10
+Corrected sidecar root: /data/cd25/isolated_runs_V33/3D_UNet_pft/processed/v33_context_sidecar_camden_z001_010_no1112 V22 normalization root: /data/cd25/isolated_runs_V33/3D_UNet_pft/processed/v33_context_sidecar_camden_z001_010_no1112 global_channels=['emission_values', 'ls_forcing_right_CO2', 'u', 'v', 'w', 'p', 'theta', 'fluid_mask', 'prev_kc_CO2_global'] global_sample_size=64 use_global_context=True min_layer_overlap=8
+Excluded months from train/val metadata: [11, 12]
+V22 previous-CO2 sidecar root: /data/cd25/isolated_runs_V33/3D_UNet_pft/processed/v33_previous_co2_sidecar_camden_z001_010_no1112
+V28 physics advection: features=1 correction_target=False dx/dy/dz=(5.0, 5.0, 10.0) m effective_dt=120.0 s delta_scale=5.0 gradient_scale=0.2 advection_clip=20.0 input_clip=8.0
+V22 selected samples: train=16036 val=1988
+V22 local transformed channels=['emission_values', 'ls_forcing_right_CO2', 'u', 'v', 'p', 'theta', 'w', 'albedo_type', 'water_type', 'pavement_type', 'street_type', 'vegetation_type', 'evi_pft', 'lswi_pft', 'month_sin', 'month_cos', 'tod_sin', 'tod_cos', 'x_norm', 'y_norm', 'z_norm', 'fluid_mask', 'prev_kc_CO2', 'prev_dCdx', 'prev_dCdy', 'prev_dCdz', 'adv_x_delta', 'adv_y_delta', 'adv_z_delta', 'adv_total_delta']
+V22 surface decay: enabled=True channels=(7, 8, 9, 10, 11) decay_levels=30.0 append_height_gate=False
+RF-guided local input pruning: kept=['emission_values', 'ls_forcing_right_CO2', 'u', 'v', 'p', 'theta', 'w', 'month_sin', 'month_cos', 'tod_sin', 'tod_cos', 'x_norm', 'y_norm', 'z_norm', 'prev_kc_CO2', 'prev_dCdx', 'prev_dCdy', 'prev_dCdz'] indices=[0, 1, 2, 3, 4, 5, 6, 14, 15, 16, 17, 18, 19, 20, 22, 23, 24, 25] original_count=30 kept_count=18
+Texture-aware training sampler: sidecar=/data/cd25/isolated_runs_V33/3D_UNet_pft/processed/v33_texture_sidecar_camden_z001_010_no1112 num_samples=512 replacement=1 weight_min=0.45 weight_max=4.161 weight_mean=1.005
+Cached training epoch samples: 512 random patches from pool=16036
+Cached validation epoch samples: 128 fixed random patches from pool=1988 seed=100045
+Sample channels=18, sample shape=(18, 16, 256, 256)
+Sample global context channels=9, shape=(9, 16, 80, 80)
+Using device: cuda
+Model variant: v38_event_texture_context_v7 architecture=v38_z001_010_event_texture_context_v7_autoregressive_delta
+Checkpoint path: /data/cd25/isolated_runs_V40/3D_UNet_pft/processed/unet3d_runs_v40_keep_prev_monitor/best_model.pt
+Delta monitor checkpoints enabled: delta_R->/data/cd25/isolated_runs_V40/3D_UNet_pft/processed/unet3d_runs_v40_keep_prev_monitor/best_delta_r_model.pt, hard_delta_R->/data/cd25/isolated_runs_V40/3D_UNet_pft/processed/unet3d_runs_v40_keep_prev_monitor/best_hard_delta_r_model.pt, sign->/data/cd25/isolated_runs_V40/3D_UNet_pft/processed/unet3d_runs_v40_keep_prev_monitor/best_sign_accuracy_model.pt, pattern_score->/data/cd25/isolated_runs_V40/3D_UNet_pft/processed/unet3d_runs_v40_keep_prev_monitor/best_pattern_score_model.pt
+Loss config: base=huber, huber_delta=2.0, gradient_weight=0.03, multiscale_weight=0.0, multiscale_scales=(8, 16, 32, 64), multiscale_min_valid_fraction=0.5, smoothness_weight=0.0, smoothness_kernel=9, variance_weight=0.0, variance_min_std=2.0, variance_eps=1e-06, residual_weight_alpha=0.5, residual_weight_scale=4.0, residual_weight_max=4.0, target_gradient_weight_alpha=0.35, target_gradient_weight_scale=1.0, target_gradient_weight_max=2.5, low_layer_weight_alpha=0.0, normalized_weight=0.0, normalized_min_std=0.75, normalized_huber_delta=1.0, correlation_weight=0.04, correlation_min_target_std=0.25, pattern_height_decay=False, low_frequency_weight=0.04, low_frequency_pool=16, low_frequency_corr_weight=0.02, high_frequency_weight=0.04, high_frequency_huber_delta=0.85, local_correlation_weight=0.05, local_correlation_pool=32, local_correlation_min_target_std=0.45, amplitude_weight=0.05, amplitude_min_target_std=0.45, active_delta_weight=0.35, active_delta_threshold=0.75, sign_loss_weight=0.015, sign_loss_min_abs=0.75, sign_loss_scale=2.0, active_loss_weight=0.02, active_loss_threshold=0.75, active_loss_pos_weight=2.0, sign_class_loss_weight=0.02, sign_class_loss_min_abs=0.75, sign_class_loss_pos_weight=1.0, min_high_gate=0.2, v28_advection_features=True, v28_advection_correction_target=False, v28_advection_dt=120.0, v28_advection_spacing=(5.0,5.0,10.0)
+LR scheduler: plateau (factor=0.5, patience=7, min_lr=1e-06)
+Early stopping: patience=18, min_delta=0.0
+Initializing model weights from checkpoint: /data/cd25/isolated_runs_V38/3D_UNet_pft/processed/unet3d_runs_v38_event_texture/best_model.pt
+Flexible partial init: missing_keys=0 unexpected_or_skipped_keys=0 adapted_shape_keys=0
+Initialized from epoch=70 val_loss=6.819383557420224 best_val=6.819383557420224; optimizer, scheduler, history, and best_val start fresh for this run.
+Start epoch 001/070
+[train] epoch=001 done steps=512 avg_loss=5.816250 elapsed=470.2s
+[val] epoch=001 done steps=128 avg_loss=4.266545 elapsed=64.6s
+[monitor] epoch=001 delta_R=0.437733 hard_delta_R=0.451612 sign_acc=0.822644 amp_ratio=0.719772 active_frac=0.709879 pattern_score=0.599700
+epoch=001 train_loss=5.816250 val_loss=4.266545 best_val=4.266545 lr=3e-05 improved=1 no_improve=0
+Saved monitor checkpoint best_delta_r: epoch=001 delta_r_mean=0.437733 -> /data/cd25/isolated_runs_V40/3D_UNet_pft/processed/unet3d_runs_v40_keep_prev_monitor/best_delta_r_model.pt
+Saved monitor checkpoint best_hard_delta_r: epoch=001 hard_delta_r_mean=0.451612 -> /data/cd25/isolated_runs_V40/3D_UNet_pft/processed/unet3d_runs_v40_keep_prev_monitor/best_hard_delta_r_model.pt
+Saved monitor checkpoint best_sign_accuracy: epoch=001 sign_accuracy=0.822644 -> /data/cd25/isolated_runs_V40/3D_UNet_pft/processed/unet3d_runs_v40_keep_prev_monitor/best_sign_accuracy_model.pt
+Saved monitor checkpoint best_pattern_score: epoch=001 pattern_score=0.599700 -> /data/cd25/isolated_runs_V40/3D_UNet_pft/processed/unet3d_runs_v40_keep_prev_monitor/best_pattern_score_model.pt
+Saved new best checkpoint: /data/cd25/isolated_runs_V40/3D_UNet_pft/processed/unet3d_runs_v40_keep_prev_monitor/best_model.pt
+Start epoch 002/070
+[train] epoch=002 done steps=512 avg_loss=5.700151 elapsed=477.8s
+[val] epoch=002 done steps=128 avg_loss=4.177143 elapsed=96.9s
+[monitor] epoch=002 delta_R=0.435568 hard_delta_R=0.451503 sign_acc=0.822138 amp_ratio=0.716604 active_frac=0.709879 pattern_score=0.599269
+epoch=002 train_loss=5.700151 val_loss=4.177143 best_val=4.177143 lr=3e-05 improved=1 no_improve=0
+Saved new best checkpoint: /data/cd25/isolated_runs_V40/3D_UNet_pft/processed/unet3d_runs_v40_keep_prev_monitor/best_model.pt
+Start epoch 003/070
+[train] epoch=003 done steps=512 avg_loss=5.598859 elapsed=480.5s
+[val] epoch=003 done steps=128 avg_loss=4.210442 elapsed=91.3s
+[monitor] epoch=003 delta_R=0.438603 hard_delta_R=0.451531 sign_acc=0.822853 amp_ratio=0.685512 active_frac=0.709879 pattern_score=0.597222
+epoch=003 train_loss=5.598859 val_loss=4.210442 best_val=4.177143 lr=3e-05 improved=0 no_improve=1
+Saved monitor checkpoint best_delta_r: epoch=003 delta_r_mean=0.438603 -> /data/cd25/isolated_runs_V40/3D_UNet_pft/processed/unet3d_runs_v40_keep_prev_monitor/best_delta_r_model.pt
+Saved monitor checkpoint best_sign_accuracy: epoch=003 sign_accuracy=0.822853 -> /data/cd25/isolated_runs_V40/3D_UNet_pft/processed/unet3d_runs_v40_keep_prev_monitor/best_sign_accuracy_model.pt
+Start epoch 004/070
+[train] epoch=004 done steps=512 avg_loss=5.820169 elapsed=480.1s
+[val] epoch=004 done steps=128 avg_loss=4.198155 elapsed=93.8s
+[monitor] epoch=004 delta_R=0.437523 hard_delta_R=0.450850 sign_acc=0.824844 amp_ratio=0.676913 active_frac=0.709879 pattern_score=0.596308
+epoch=004 train_loss=5.820169 val_loss=4.198155 best_val=4.177143 lr=3e-05 improved=0 no_improve=2
+Saved monitor checkpoint best_sign_accuracy: epoch=004 sign_accuracy=0.824844 -> /data/cd25/isolated_runs_V40/3D_UNet_pft/processed/unet3d_runs_v40_keep_prev_monitor/best_sign_accuracy_model.pt
+Start epoch 005/070
+[train] epoch=005 done steps=512 avg_loss=5.238937 elapsed=477.7s
+[val] epoch=005 done steps=128 avg_loss=4.275927 elapsed=38.8s
+[monitor] epoch=005 delta_R=0.435522 hard_delta_R=0.448183 sign_acc=0.826971 amp_ratio=0.623663 active_frac=0.709879 pattern_score=0.589970
+epoch=005 train_loss=5.238937 val_loss=4.275927 best_val=4.177143 lr=3e-05 improved=0 no_improve=3
+Saved monitor checkpoint best_sign_accuracy: epoch=005 sign_accuracy=0.826971 -> /data/cd25/isolated_runs_V40/3D_UNet_pft/processed/unet3d_runs_v40_keep_prev_monitor/best_sign_accuracy_model.pt
+Start epoch 006/070
+[train] epoch=006 done steps=512 avg_loss=5.795972 elapsed=475.9s
+[val] epoch=006 done steps=128 avg_loss=4.228409 elapsed=89.5s
+[monitor] epoch=006 delta_R=0.436807 hard_delta_R=0.450736 sign_acc=0.826352 amp_ratio=0.729080 active_frac=0.709879 pattern_score=0.600207
+epoch=006 train_loss=5.795972 val_loss=4.228409 best_val=4.177143 lr=3e-05 improved=0 no_improve=4
+Saved monitor checkpoint best_pattern_score: epoch=006 pattern_score=0.600207 -> /data/cd25/isolated_runs_V40/3D_UNet_pft/processed/unet3d_runs_v40_keep_prev_monitor/best_pattern_score_model.pt
+Start epoch 007/070
+[train] epoch=007 done steps=512 avg_loss=5.560851 elapsed=480.1s
+[val] epoch=007 done steps=128 avg_loss=4.241630 elapsed=46.3s
+[monitor] epoch=007 delta_R=0.438743 hard_delta_R=0.451599 sign_acc=0.826344 amp_ratio=0.741757 active_frac=0.709879 pattern_score=0.601931
+epoch=007 train_loss=5.560851 val_loss=4.241630 best_val=4.177143 lr=3e-05 improved=0 no_improve=5
+Saved monitor checkpoint best_delta_r: epoch=007 delta_r_mean=0.438743 -> /data/cd25/isolated_runs_V40/3D_UNet_pft/processed/unet3d_runs_v40_keep_prev_monitor/best_delta_r_model.pt
+Saved monitor checkpoint best_pattern_score: epoch=007 pattern_score=0.601931 -> /data/cd25/isolated_runs_V40/3D_UNet_pft/processed/unet3d_runs_v40_keep_prev_monitor/best_pattern_score_model.pt
+Start epoch 008/070
+[train] epoch=008 done steps=512 avg_loss=5.744547 elapsed=478.7s
+[val] epoch=008 done steps=128 avg_loss=4.214214 elapsed=89.3s
+[monitor] epoch=008 delta_R=0.437012 hard_delta_R=0.451005 sign_acc=0.827146 amp_ratio=0.716599 active_frac=0.709879 pattern_score=0.599772
+epoch=008 train_loss=5.744547 val_loss=4.214214 best_val=4.177143 lr=3e-05 improved=0 no_improve=6
+Saved monitor checkpoint best_sign_accuracy: epoch=008 sign_accuracy=0.827146 -> /data/cd25/isolated_runs_V40/3D_UNet_pft/processed/unet3d_runs_v40_keep_prev_monitor/best_sign_accuracy_model.pt
+Start epoch 009/070
+[train] epoch=009 done steps=512 avg_loss=5.819194 elapsed=481.0s
+[val] epoch=009 done steps=128 avg_loss=4.260633 elapsed=46.7s
+[monitor] epoch=009 delta_R=0.434693 hard_delta_R=0.447946 sign_acc=0.824761 amp_ratio=0.740181 active_frac=0.709879 pattern_score=0.597855
+epoch=009 train_loss=5.819194 val_loss=4.260633 best_val=4.177143 lr=3e-05 improved=0 no_improve=7
+Start epoch 010/070
+[train] epoch=010 done steps=512 avg_loss=5.297245 elapsed=477.4s
+[val] epoch=010 done steps=128 avg_loss=4.183625 elapsed=88.8s
+[monitor] epoch=010 delta_R=0.442166 hard_delta_R=0.455743 sign_acc=0.826542 amp_ratio=0.715133 active_frac=0.709879 pattern_score=0.604287
+epoch=010 train_loss=5.297245 val_loss=4.183625 best_val=4.177143 lr=1.5e-05 improved=0 no_improve=8
+LR reduced: 3e-05 -> 1.5e-05
+Saved monitor checkpoint best_delta_r: epoch=010 delta_r_mean=0.442166 -> /data/cd25/isolated_runs_V40/3D_UNet_pft/processed/unet3d_runs_v40_keep_prev_monitor/best_delta_r_model.pt
+Saved monitor checkpoint best_hard_delta_r: epoch=010 hard_delta_r_mean=0.455743 -> /data/cd25/isolated_runs_V40/3D_UNet_pft/processed/unet3d_runs_v40_keep_prev_monitor/best_hard_delta_r_model.pt
+Saved monitor checkpoint best_pattern_score: epoch=010 pattern_score=0.604287 -> /data/cd25/isolated_runs_V40/3D_UNet_pft/processed/unet3d_runs_v40_keep_prev_monitor/best_pattern_score_model.pt
+Start epoch 011/070
+[train] epoch=011 done steps=512 avg_loss=5.303274 elapsed=483.0s
+[val] epoch=011 done steps=128 avg_loss=4.192328 elapsed=47.1s
+[monitor] epoch=011 delta_R=0.437875 hard_delta_R=0.451289 sign_acc=0.828778 amp_ratio=0.728325 active_frac=0.709879 pattern_score=0.601194
+epoch=011 train_loss=5.303274 val_loss=4.192328 best_val=4.177143 lr=1.5e-05 improved=0 no_improve=9
+Saved monitor checkpoint best_sign_accuracy: epoch=011 sign_accuracy=0.828778 -> /data/cd25/isolated_runs_V40/3D_UNet_pft/processed/unet3d_runs_v40_keep_prev_monitor/best_sign_accuracy_model.pt
+Start epoch 012/070
+[train] epoch=012 done steps=512 avg_loss=5.360164 elapsed=479.3s
+[val] epoch=012 done steps=128 avg_loss=4.139300 elapsed=86.5s
+[monitor] epoch=012 delta_R=0.439527 hard_delta_R=0.453568 sign_acc=0.829702 amp_ratio=0.703154 active_frac=0.709879 pattern_score=0.601900
+epoch=012 train_loss=5.360164 val_loss=4.139300 best_val=4.139300 lr=1.5e-05 improved=1 no_improve=0
+Saved monitor checkpoint best_sign_accuracy: epoch=012 sign_accuracy=0.829702 -> /data/cd25/isolated_runs_V40/3D_UNet_pft/processed/unet3d_runs_v40_keep_prev_monitor/best_sign_accuracy_model.pt
+Saved new best checkpoint: /data/cd25/isolated_runs_V40/3D_UNet_pft/processed/unet3d_runs_v40_keep_prev_monitor/best_model.pt
+Start epoch 013/070
+[train] epoch=013 done steps=512 avg_loss=4.909841 elapsed=482.1s
+[val] epoch=013 done steps=128 avg_loss=4.157766 elapsed=37.7s
+[monitor] epoch=013 delta_R=0.440763 hard_delta_R=0.454128 sign_acc=0.828155 amp_ratio=0.727270 active_frac=0.709879 pattern_score=0.603836
+epoch=013 train_loss=4.909841 val_loss=4.157766 best_val=4.139300 lr=1.5e-05 improved=0 no_improve=1
+Start epoch 014/070
+[train] epoch=014 done steps=512 avg_loss=4.872113 elapsed=475.5s
+[val] epoch=014 done steps=128 avg_loss=4.145514 elapsed=98.7s
+[monitor] epoch=014 delta_R=0.441308 hard_delta_R=0.455712 sign_acc=0.828299 amp_ratio=0.665115 active_frac=0.709879 pattern_score=0.600982
+epoch=014 train_loss=4.872113 val_loss=4.145514 best_val=4.139300 lr=1.5e-05 improved=0 no_improve=2
+Start epoch 015/070
+[train] epoch=015 done steps=512 avg_loss=5.213709 elapsed=484.2s
+[val] epoch=015 done steps=128 avg_loss=4.145213 elapsed=97.3s
+[monitor] epoch=015 delta_R=0.439691 hard_delta_R=0.453138 sign_acc=0.826537 amp_ratio=0.686124 active_frac=0.709879 pattern_score=0.599611
+epoch=015 train_loss=5.213709 val_loss=4.145213 best_val=4.139300 lr=1.5e-05 improved=0 no_improve=3
+Start epoch 016/070
+[train] epoch=016 done steps=512 avg_loss=5.778563 elapsed=484.7s
+[val] epoch=016 done steps=128 avg_loss=4.166852 elapsed=40.6s
+[monitor] epoch=016 delta_R=0.447093 hard_delta_R=0.460064 sign_acc=0.825522 amp_ratio=0.721703 active_frac=0.709879 pattern_score=0.608861
+epoch=016 train_loss=5.778563 val_loss=4.166852 best_val=4.139300 lr=1.5e-05 improved=0 no_improve=4
+Saved monitor checkpoint best_delta_r: epoch=016 delta_r_mean=0.447093 -> /data/cd25/isolated_runs_V40/3D_UNet_pft/processed/unet3d_runs_v40_keep_prev_monitor/best_delta_r_model.pt
+Saved monitor checkpoint best_hard_delta_r: epoch=016 hard_delta_r_mean=0.460064 -> /data/cd25/isolated_runs_V40/3D_UNet_pft/processed/unet3d_runs_v40_keep_prev_monitor/best_hard_delta_r_model.pt
+Saved monitor checkpoint best_pattern_score: epoch=016 pattern_score=0.608861 -> /data/cd25/isolated_runs_V40/3D_UNet_pft/processed/unet3d_runs_v40_keep_prev_monitor/best_pattern_score_model.pt
+Start epoch 017/070
+[train] epoch=017 done steps=512 avg_loss=5.494335 elapsed=476.1s
+[val] epoch=017 done steps=128 avg_loss=4.254729 elapsed=98.7s
+[monitor] epoch=017 delta_R=0.442509 hard_delta_R=0.454518 sign_acc=0.827824 amp_ratio=0.708819 active_frac=0.709879 pattern_score=0.602875
+epoch=017 train_loss=5.494335 val_loss=4.254729 best_val=4.139300 lr=1.5e-05 improved=0 no_improve=5
+Start epoch 018/070
+[train] epoch=018 done steps=512 avg_loss=5.659135 elapsed=483.8s
+[val] epoch=018 done steps=128 avg_loss=4.184447 elapsed=41.5s
+[monitor] epoch=018 delta_R=0.441621 hard_delta_R=0.455056 sign_acc=0.825754 amp_ratio=0.728095 active_frac=0.709879 pattern_score=0.604341
+epoch=018 train_loss=5.659135 val_loss=4.184447 best_val=4.139300 lr=1.5e-05 improved=0 no_improve=6
+Start epoch 019/070
+[train] epoch=019 done steps=512 avg_loss=5.608356 elapsed=475.0s
+[val] epoch=019 done steps=128 avg_loss=4.237203 elapsed=97.8s
+[monitor] epoch=019 delta_R=0.444991 hard_delta_R=0.458260 sign_acc=0.823145 amp_ratio=0.718230 active_frac=0.709879 pattern_score=0.606341
+epoch=019 train_loss=5.608356 val_loss=4.237203 best_val=4.139300 lr=1.5e-05 improved=0 no_improve=7
+Start epoch 020/070
+[train] epoch=020 done steps=512 avg_loss=5.402194 elapsed=483.1s
+[val] epoch=020 done steps=128 avg_loss=4.208351 elapsed=41.5s
+[monitor] epoch=020 delta_R=0.446602 hard_delta_R=0.459478 sign_acc=0.822841 amp_ratio=0.770653 active_frac=0.709879 pattern_score=0.611020
+epoch=020 train_loss=5.402194 val_loss=4.208351 best_val=4.139300 lr=7.5e-06 improved=0 no_improve=8
+LR reduced: 1.5e-05 -> 7.5e-06
+Saved monitor checkpoint best_pattern_score: epoch=020 pattern_score=0.611020 -> /data/cd25/isolated_runs_V40/3D_UNet_pft/processed/unet3d_runs_v40_keep_prev_monitor/best_pattern_score_model.pt
+Start epoch 021/070
+[train] epoch=021 done steps=512 avg_loss=5.686776 elapsed=477.2s
+[val] epoch=021 done steps=128 avg_loss=4.197315 elapsed=99.0s
+[monitor] epoch=021 delta_R=0.443506 hard_delta_R=0.457464 sign_acc=0.824071 amp_ratio=0.697816 active_frac=0.709879 pattern_score=0.604289
+epoch=021 train_loss=5.686776 val_loss=4.197315 best_val=4.139300 lr=7.5e-06 improved=0 no_improve=9
+Start epoch 022/070
+[train] epoch=022 done steps=512 avg_loss=5.292007 elapsed=483.6s
+[val] epoch=022 done steps=128 avg_loss=4.178587 elapsed=51.6s
+[monitor] epoch=022 delta_R=0.442190 hard_delta_R=0.455950 sign_acc=0.825403 amp_ratio=0.685063 active_frac=0.709879 pattern_score=0.602119
+epoch=022 train_loss=5.292007 val_loss=4.178587 best_val=4.139300 lr=7.5e-06 improved=0 no_improve=10
+Start epoch 023/070
+[train] epoch=023 done steps=512 avg_loss=5.226476 elapsed=478.6s
+[val] epoch=023 done steps=128 avg_loss=4.151294 elapsed=55.4s
+[monitor] epoch=023 delta_R=0.448140 hard_delta_R=0.461160 sign_acc=0.827364 amp_ratio=0.724176 active_frac=0.709879 pattern_score=0.610497
+epoch=023 train_loss=5.226476 val_loss=4.151294 best_val=4.139300 lr=7.5e-06 improved=0 no_improve=11
+Saved monitor checkpoint best_delta_r: epoch=023 delta_r_mean=0.448140 -> /data/cd25/isolated_runs_V40/3D_UNet_pft/processed/unet3d_runs_v40_keep_prev_monitor/best_delta_r_model.pt
+Saved monitor checkpoint best_hard_delta_r: epoch=023 hard_delta_r_mean=0.461160 -> /data/cd25/isolated_runs_V40/3D_UNet_pft/processed/unet3d_runs_v40_keep_prev_monitor/best_hard_delta_r_model.pt
+Start epoch 024/070
+[train] epoch=024 done steps=512 avg_loss=5.726593 elapsed=482.5s
+[val] epoch=024 done steps=128 avg_loss=4.150018 elapsed=84.6s
+[monitor] epoch=024 delta_R=0.448586 hard_delta_R=0.462481 sign_acc=0.829632 amp_ratio=0.735431 active_frac=0.709879 pattern_score=0.613042
+epoch=024 train_loss=5.726593 val_loss=4.150018 best_val=4.139300 lr=7.5e-06 improved=0 no_improve=12
+Saved monitor checkpoint best_delta_r: epoch=024 delta_r_mean=0.448586 -> /data/cd25/isolated_runs_V40/3D_UNet_pft/processed/unet3d_runs_v40_keep_prev_monitor/best_delta_r_model.pt
+Saved monitor checkpoint best_hard_delta_r: epoch=024 hard_delta_r_mean=0.462481 -> /data/cd25/isolated_runs_V40/3D_UNet_pft/processed/unet3d_runs_v40_keep_prev_monitor/best_hard_delta_r_model.pt
+Saved monitor checkpoint best_pattern_score: epoch=024 pattern_score=0.613042 -> /data/cd25/isolated_runs_V40/3D_UNet_pft/processed/unet3d_runs_v40_keep_prev_monitor/best_pattern_score_model.pt
+Start epoch 025/070
+[train] epoch=025 done steps=512 avg_loss=5.484288 elapsed=484.4s
+[val] epoch=025 done steps=128 avg_loss=4.150745 elapsed=56.1s
+[monitor] epoch=025 delta_R=0.444927 hard_delta_R=0.458755 sign_acc=0.829303 amp_ratio=0.694900 active_frac=0.709879 pattern_score=0.606417
+epoch=025 train_loss=5.484288 val_loss=4.150745 best_val=4.139300 lr=7.5e-06 improved=0 no_improve=13
+Start epoch 026/070
+[train] epoch=026 done steps=512 avg_loss=5.411459 elapsed=494.3s
+[val] epoch=026 done steps=128 avg_loss=4.136120 elapsed=85.6s
+[monitor] epoch=026 delta_R=0.447818 hard_delta_R=0.461911 sign_acc=0.829252 amp_ratio=0.704398 active_frac=0.709879 pattern_score=0.610241
+epoch=026 train_loss=5.411459 val_loss=4.136120 best_val=4.136120 lr=7.5e-06 improved=1 no_improve=0
+Saved new best checkpoint: /data/cd25/isolated_runs_V40/3D_UNet_pft/processed/unet3d_runs_v40_keep_prev_monitor/best_model.pt
+Start epoch 027/070
+[train] epoch=027 done steps=512 avg_loss=5.562423 elapsed=484.1s
+[val] epoch=027 done steps=128 avg_loss=4.138326 elapsed=46.6s
+[monitor] epoch=027 delta_R=0.447026 hard_delta_R=0.460320 sign_acc=0.827293 amp_ratio=0.714382 active_frac=0.709879 pattern_score=0.608962
+epoch=027 train_loss=5.562423 val_loss=4.138326 best_val=4.136120 lr=7.5e-06 improved=0 no_improve=1
+Start epoch 028/070
+[train] epoch=028 done steps=512 avg_loss=5.458709 elapsed=478.0s
+[val] epoch=028 done steps=128 avg_loss=4.130799 elapsed=84.1s
+[monitor] epoch=028 delta_R=0.446848 hard_delta_R=0.459959 sign_acc=0.828482 amp_ratio=0.713727 active_frac=0.709879 pattern_score=0.608792
+epoch=028 train_loss=5.458709 val_loss=4.130799 best_val=4.130799 lr=7.5e-06 improved=1 no_improve=0
+Saved new best checkpoint: /data/cd25/isolated_runs_V40/3D_UNet_pft/processed/unet3d_runs_v40_keep_prev_monitor/best_model.pt
+Start epoch 029/070
+[train] epoch=029 done steps=512 avg_loss=5.257947 elapsed=485.7s
+[val] epoch=029 done steps=128 avg_loss=4.134480 elapsed=48.6s
+[monitor] epoch=029 delta_R=0.446391 hard_delta_R=0.459650 sign_acc=0.829800 amp_ratio=0.705761 active_frac=0.709879 pattern_score=0.608186
+epoch=029 train_loss=5.257947 val_loss=4.134480 best_val=4.130799 lr=7.5e-06 improved=0 no_improve=1
+Saved monitor checkpoint best_sign_accuracy: epoch=029 sign_accuracy=0.829800 -> /data/cd25/isolated_runs_V40/3D_UNet_pft/processed/unet3d_runs_v40_keep_prev_monitor/best_sign_accuracy_model.pt
+Start epoch 030/070
+[train] epoch=030 done steps=512 avg_loss=5.370171 elapsed=481.8s
+[val] epoch=030 done steps=128 avg_loss=4.158429 elapsed=77.4s
+[monitor] epoch=030 delta_R=0.444325 hard_delta_R=0.457678 sign_acc=0.825754 amp_ratio=0.719333 active_frac=0.709879 pattern_score=0.606357
+epoch=030 train_loss=5.370171 val_loss=4.158429 best_val=4.130799 lr=7.5e-06 improved=0 no_improve=2
+Start epoch 031/070
+[train] epoch=031 done steps=512 avg_loss=5.040252 elapsed=483.0s
+[val] epoch=031 done steps=128 avg_loss=4.149454 elapsed=60.5s
+[monitor] epoch=031 delta_R=0.444487 hard_delta_R=0.457348 sign_acc=0.827887 amp_ratio=0.728836 active_frac=0.709879 pattern_score=0.607110
+epoch=031 train_loss=5.040252 val_loss=4.149454 best_val=4.130799 lr=7.5e-06 improved=0 no_improve=3
+Start epoch 032/070
+[train] epoch=032 done steps=512 avg_loss=5.543092 elapsed=484.5s
+[val] epoch=032 done steps=128 avg_loss=4.141262 elapsed=76.2s
+[monitor] epoch=032 delta_R=0.445923 hard_delta_R=0.459416 sign_acc=0.829426 amp_ratio=0.717153 active_frac=0.709879 pattern_score=0.608678
+epoch=032 train_loss=5.543092 val_loss=4.141262 best_val=4.130799 lr=7.5e-06 improved=0 no_improve=4
+Start epoch 033/070
+[train] epoch=033 done steps=512 avg_loss=5.501865 elapsed=483.7s
+[val] epoch=033 done steps=128 avg_loss=4.129373 elapsed=37.7s
+[monitor] epoch=033 delta_R=0.444733 hard_delta_R=0.457757 sign_acc=0.829693 amp_ratio=0.700292 active_frac=0.709879 pattern_score=0.605883
+epoch=033 train_loss=5.501865 val_loss=4.129373 best_val=4.129373 lr=7.5e-06 improved=1 no_improve=0
+Saved new best checkpoint: /data/cd25/isolated_runs_V40/3D_UNet_pft/processed/unet3d_runs_v40_keep_prev_monitor/best_model.pt
+Start epoch 034/070
+[train] epoch=034 done steps=512 avg_loss=5.640731 elapsed=476.4s
+[val] epoch=034 done steps=128 avg_loss=4.109655 elapsed=66.3s
+[monitor] epoch=034 delta_R=0.445136 hard_delta_R=0.458823 sign_acc=0.829913 amp_ratio=0.681353 active_frac=0.709879 pattern_score=0.605622
+epoch=034 train_loss=5.640731 val_loss=4.109655 best_val=4.109655 lr=7.5e-06 improved=1 no_improve=0
+Saved monitor checkpoint best_sign_accuracy: epoch=034 sign_accuracy=0.829913 -> /data/cd25/isolated_runs_V40/3D_UNet_pft/processed/unet3d_runs_v40_keep_prev_monitor/best_sign_accuracy_model.pt
+Saved new best checkpoint: /data/cd25/isolated_runs_V40/3D_UNet_pft/processed/unet3d_runs_v40_keep_prev_monitor/best_model.pt
+Start epoch 035/070
+[train] epoch=035 done steps=512 avg_loss=5.438737 elapsed=482.8s
+[val] epoch=035 done steps=128 avg_loss=4.131934 elapsed=57.1s
+[monitor] epoch=035 delta_R=0.445572 hard_delta_R=0.459758 sign_acc=0.827752 amp_ratio=0.694972 active_frac=0.709879 pattern_score=0.607115
+epoch=035 train_loss=5.438737 val_loss=4.131934 best_val=4.109655 lr=7.5e-06 improved=0 no_improve=1
+Start epoch 036/070
+[train] epoch=036 done steps=512 avg_loss=5.405304 elapsed=482.7s
+[val] epoch=036 done steps=128 avg_loss=4.133934 elapsed=73.4s
+[monitor] epoch=036 delta_R=0.446021 hard_delta_R=0.459571 sign_acc=0.829178 amp_ratio=0.720973 active_frac=0.709879 pattern_score=0.609049
+epoch=036 train_loss=5.405304 val_loss=4.133934 best_val=4.109655 lr=7.5e-06 improved=0 no_improve=2
+Start epoch 037/070
+[train] epoch=037 done steps=512 avg_loss=5.541725 elapsed=483.4s
+[val] epoch=037 done steps=128 avg_loss=4.142784 elapsed=67.0s
+[monitor] epoch=037 delta_R=0.446548 hard_delta_R=0.460039 sign_acc=0.828880 amp_ratio=0.715144 active_frac=0.709879 pattern_score=0.609052
+epoch=037 train_loss=5.541725 val_loss=4.142784 best_val=4.109655 lr=7.5e-06 improved=0 no_improve=3
+Start epoch 038/070
+[train] epoch=038 done steps=512 avg_loss=5.254472 elapsed=480.5s
+[val] epoch=038 done steps=128 avg_loss=4.078246 elapsed=73.8s
+[monitor] epoch=038 delta_R=0.444175 hard_delta_R=0.458078 sign_acc=0.829443 amp_ratio=0.699729 active_frac=0.709879 pattern_score=0.606114
+epoch=038 train_loss=5.254472 val_loss=4.078246 best_val=4.078246 lr=7.5e-06 improved=1 no_improve=0
+Saved new best checkpoint: /data/cd25/isolated_runs_V40/3D_UNet_pft/processed/unet3d_runs_v40_keep_prev_monitor/best_model.pt
+Start epoch 039/070
+[train] epoch=039 done steps=512 avg_loss=5.028589 elapsed=479.3s
+[val] epoch=039 done steps=128 avg_loss=4.106943 elapsed=68.8s
+[monitor] epoch=039 delta_R=0.442740 hard_delta_R=0.456637 sign_acc=0.828114 amp_ratio=0.704529 active_frac=0.709879 pattern_score=0.604748
+epoch=039 train_loss=5.028589 val_loss=4.106943 best_val=4.078246 lr=7.5e-06 improved=0 no_improve=1
+Start epoch 040/070
+[train] epoch=040 done steps=512 avg_loss=5.344746 elapsed=493.4s
+[val] epoch=040 done steps=128 avg_loss=4.086276 elapsed=73.6s
+[monitor] epoch=040 delta_R=0.445693 hard_delta_R=0.459857 sign_acc=0.830307 amp_ratio=0.683813 active_frac=0.709879 pattern_score=0.606915
+epoch=040 train_loss=5.344746 val_loss=4.086276 best_val=4.078246 lr=7.5e-06 improved=0 no_improve=2
+Saved monitor checkpoint best_sign_accuracy: epoch=040 sign_accuracy=0.830307 -> /data/cd25/isolated_runs_V40/3D_UNet_pft/processed/unet3d_runs_v40_keep_prev_monitor/best_sign_accuracy_model.pt
+Start epoch 041/070
+[train] epoch=041 done steps=512 avg_loss=4.998482 elapsed=479.2s
+[val] epoch=041 done steps=128 avg_loss=4.126370 elapsed=52.7s
+[monitor] epoch=041 delta_R=0.445474 hard_delta_R=0.459565 sign_acc=0.826471 amp_ratio=0.712077 active_frac=0.709879 pattern_score=0.607881
+epoch=041 train_loss=4.998482 val_loss=4.126370 best_val=4.078246 lr=7.5e-06 improved=0 no_improve=3
+Start epoch 042/070
+[train] epoch=042 done steps=512 avg_loss=5.462159 elapsed=477.8s
+[val] epoch=042 done steps=128 avg_loss=4.105878 elapsed=41.1s
+[monitor] epoch=042 delta_R=0.444479 hard_delta_R=0.457970 sign_acc=0.827456 amp_ratio=0.680989 active_frac=0.709879 pattern_score=0.604251
+epoch=042 train_loss=5.462159 val_loss=4.105878 best_val=4.078246 lr=7.5e-06 improved=0 no_improve=4
+Start epoch 043/070
+[train] epoch=043 done steps=512 avg_loss=5.294498 elapsed=474.1s
+[val] epoch=043 done steps=128 avg_loss=4.108243 elapsed=62.1s
+[monitor] epoch=043 delta_R=0.445576 hard_delta_R=0.459721 sign_acc=0.829538 amp_ratio=0.694228 active_frac=0.709879 pattern_score=0.607381
+epoch=043 train_loss=5.294498 val_loss=4.108243 best_val=4.078246 lr=7.5e-06 improved=0 no_improve=5
+Start epoch 044/070
+[train] epoch=044 done steps=512 avg_loss=4.996038 elapsed=478.5s
+[val] epoch=044 done steps=128 avg_loss=4.086851 elapsed=83.0s
+[monitor] epoch=044 delta_R=0.446078 hard_delta_R=0.460262 sign_acc=0.830218 amp_ratio=0.716237 active_frac=0.709879 pattern_score=0.609618
+epoch=044 train_loss=4.996038 val_loss=4.086851 best_val=4.078246 lr=7.5e-06 improved=0 no_improve=6
+Start epoch 045/070
+[train] epoch=045 done steps=512 avg_loss=5.111561 elapsed=477.6s
+[val] epoch=045 done steps=128 avg_loss=4.099953 elapsed=46.5s
+[monitor] epoch=045 delta_R=0.445230 hard_delta_R=0.459134 sign_acc=0.830460 amp_ratio=0.695785 active_frac=0.709879 pattern_score=0.607091
+epoch=045 train_loss=5.111561 val_loss=4.099953 best_val=4.078246 lr=7.5e-06 improved=0 no_improve=7
+Saved monitor checkpoint best_sign_accuracy: epoch=045 sign_accuracy=0.830460 -> /data/cd25/isolated_runs_V40/3D_UNet_pft/processed/unet3d_runs_v40_keep_prev_monitor/best_sign_accuracy_model.pt
+Start epoch 046/070
+[train] epoch=046 done steps=512 avg_loss=5.541376 elapsed=474.5s
+[val] epoch=046 done steps=128 avg_loss=4.094571 elapsed=90.8s
+[monitor] epoch=046 delta_R=0.444589 hard_delta_R=0.458195 sign_acc=0.830644 amp_ratio=0.728530 active_frac=0.709879 pattern_score=0.608488
+epoch=046 train_loss=5.541376 val_loss=4.094571 best_val=4.078246 lr=3.75e-06 improved=0 no_improve=8
+LR reduced: 7.5e-06 -> 3.75e-06
+Saved monitor checkpoint best_sign_accuracy: epoch=046 sign_accuracy=0.830644 -> /data/cd25/isolated_runs_V40/3D_UNet_pft/processed/unet3d_runs_v40_keep_prev_monitor/best_sign_accuracy_model.pt
+Start epoch 047/070
+[train] epoch=047 done steps=512 avg_loss=5.272879 elapsed=476.0s
+[val] epoch=047 done steps=128 avg_loss=4.081837 elapsed=51.4s
+[monitor] epoch=047 delta_R=0.445550 hard_delta_R=0.459341 sign_acc=0.832158 amp_ratio=0.711940 active_frac=0.709879 pattern_score=0.608784
+epoch=047 train_loss=5.272879 val_loss=4.081837 best_val=4.078246 lr=3.75e-06 improved=0 no_improve=9
+Saved monitor checkpoint best_sign_accuracy: epoch=047 sign_accuracy=0.832158 -> /data/cd25/isolated_runs_V40/3D_UNet_pft/processed/unet3d_runs_v40_keep_prev_monitor/best_sign_accuracy_model.pt
+Start epoch 048/070
+[train] epoch=048 done steps=512 avg_loss=5.580558 elapsed=476.1s
+[val] epoch=048 done steps=128 avg_loss=4.103674 elapsed=87.1s
+[monitor] epoch=048 delta_R=0.447412 hard_delta_R=0.461860 sign_acc=0.831028 amp_ratio=0.720857 active_frac=0.709879 pattern_score=0.611700
+epoch=048 train_loss=5.580558 val_loss=4.103674 best_val=4.078246 lr=3.75e-06 improved=0 no_improve=10
+Start epoch 049/070
+[train] epoch=049 done steps=512 avg_loss=5.390879 elapsed=475.4s
+[val] epoch=049 done steps=128 avg_loss=4.087840 elapsed=55.0s
+[monitor] epoch=049 delta_R=0.445126 hard_delta_R=0.459600 sign_acc=0.831749 amp_ratio=0.709297 active_frac=0.709879 pattern_score=0.608776
+epoch=049 train_loss=5.390879 val_loss=4.087840 best_val=4.078246 lr=3.75e-06 improved=0 no_improve=11
+Start epoch 050/070
+[train] epoch=050 done steps=512 avg_loss=5.019411 elapsed=478.6s
+[val] epoch=050 done steps=128 avg_loss=4.087830 elapsed=88.5s
+[monitor] epoch=050 delta_R=0.446822 hard_delta_R=0.460840 sign_acc=0.831410 amp_ratio=0.724416 active_frac=0.709879 pattern_score=0.611002
+epoch=050 train_loss=5.019411 val_loss=4.087830 best_val=4.078246 lr=3.75e-06 improved=0 no_improve=12
+Start epoch 051/070

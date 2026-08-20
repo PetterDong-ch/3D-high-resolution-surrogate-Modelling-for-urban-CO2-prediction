@@ -1,0 +1,18 @@
+{
+  "package": "final_model_task2_v3",
+  "release": "1.1.0-reproducible",
+  "python": "3.12.3",
+  "seed": 123,
+  "checkpoints": {
+    "checkpoints/camden_background_enhancement_best_model.pt": "4b3df9fb972dd2abc7c724cfe260d81e37e4959be013705f46abdd12d05885c8",
+    "checkpoints/richmond_finetune_background_enhancement_best_model.pt": "dd85338bf943d0c569d90b64189daffd321cba338b6d028a24b7cf6e2f1b98e5"
+  },
+  "expected_evaluation": {
+    "camden": {"count": 28111, "R": 0.9930835045228431, "R2": 0.9862122523496968, "MAE_ppm": 0.7853612826162356, "RMSE_ppm": 1.2311253701289704},
+    "richmond": {"count": 4276, "R": 0.9832451440350461, "R2": 0.966752623779422, "MAE_ppm": 1.076029064724443, "RMSE_ppm": 1.7451706359082761}
+  },
+  "external_data_entries": [
+    "camden_average_profile_cache/manifest.json",
+    "richmond_average_profile_cache/manifest.json"
+  ]
+}

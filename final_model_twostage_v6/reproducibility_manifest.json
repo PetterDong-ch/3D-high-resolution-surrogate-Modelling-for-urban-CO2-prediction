@@ -1,0 +1,25 @@
+{
+  "package": "final_model_twostage_v6",
+  "release": "1.1.0-reproducible",
+  "python": "3.12.3",
+  "seed": 42,
+  "checkpoints": {
+    "checkpoints/stage1_local_fno_best_model.pt": "f4711c8f691d71340aeba75452d5a62d3b96156994c23c45c6060c9bac5c8cc0",
+    "checkpoints/stage2_best_model.pt": "9564dc924526f3814b6262337f41c656661c33d702a2e978766a23897be32118",
+    "checkpoints/v40_initialization.pt": "38d5e9fc62b37b3f0ecf49df68e792032d5d3796bbd1408b5e93f5ce5bf1b865"
+  },
+  "expected_stage2_evaluation": {
+    "samples": 1988,
+    "valid_count": 549069887,
+    "direct_R": 0.9590264777823825,
+    "direct_R2": 0.9196815817291155,
+    "direct_MAE_ppm": 1.8309752356109097,
+    "direct_RMSE_ppm": 3.3334650484843826,
+    "delta_R": 0.5881053768023363,
+    "delta_R2": 0.33671629509653966
+  },
+  "external_data_entries": [
+    "camden/JOBS",
+    "v40_coordinate_sidecar/metadata_manifest.json"
+  ]
+}

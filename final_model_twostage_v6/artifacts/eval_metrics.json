@@ -1,0 +1,21 @@
+{
+  "checkpoint": "/data/cd25/two_stage_surrogate_v6/processed/v40_stage1_met_full_domain_context/best_model.pt",
+  "split": "val",
+  "global_sidecar_root": "/data/cd25/two_stage_surrogate_v6/processed/full_domain_stage1_context_sidecar",
+  "evaluated_samples": 1988,
+  "dataset_samples": 1988,
+  "direct": {
+    "valid_count": 549069887,
+    "R": 0.9590264777823825,
+    "R2": 0.9196815817291155,
+    "MAE": 1.8309752356109097,
+    "RMSE": 3.3334650484843826
+  },
+  "delta": {
+    "valid_count": 549069887,
+    "R": 0.5881053768023363,
+    "R2": 0.33671629509653966,
+    "MAE": 1.8309752360842442,
+    "RMSE": 3.3334650488698667
+  }
+}

@@ -1,0 +1,85 @@
+project: two_stage_surrogate_v1
+stage: stage1_microclimate
+
+data:
+  manifest: generated/stage1_manifest/stage1_manifest.json
+  jobs_root: external_data/camden/JOBS
+  supervised_outputs:
+    - u
+    - v
+    - w
+    - theta_prime
+  pressure_output: false
+  target_grid:
+    z: 16
+    y: 256
+    x: 256
+  notes:
+    - p is intentionally not predicted by default.
+    - theta target should be theta_prime = theta_palm - theta_reference_from_forcing.
+    - all normalization statistics must be computed from training records only.
+
+channels:
+  geometry_3d:
+    - fluid_mask
+    - x_norm
+    - y_norm
+    - z_norm
+    - building_voxel_mask
+  surface_2d:
+    - topo_all
+    - building_height
+    - vegetation_type
+    - pavement_type
+    - water_type
+    - albedo_type
+    - evi_pft
+    - lswi_pft
+  profile:
+    - ls_forcing_u_profile
+    - ls_forcing_v_profile
+    - ls_forcing_w_profile
+    - ls_forcing_pt_profile
+    - ls_forcing_qv_profile
+    - ls_forcing_right_CO2_profile
+  scalar:
+    - month_sin
+    - month_cos
+    - tod_sin
+    - tod_cos
+
+model:
+  geometry_channels: 5
+  surface_channels: 8
+  profile_channels: 6
+  scalar_channels: 4
+  width: 32
+  depth: 4
+  modes_z: 8
+  modes_y: 16
+  modes_x: 16
+  output_pressure: false
+
+loss:
+  uv_weight: 1.0
+  w_weight: 1.5
+  theta_prime_weight: 1.0
+  gradient_weight: 0.05
+  active_w_weight: 0.0
+  active_w_threshold: 0.05
+  active_w_boost: 4.0
+
+training:
+  seed: 42
+  batch_size: 1
+  epochs: 120
+  lr: 0.0003
+  weight_decay: 0.0001
+  scheduler:
+    type: plateau
+    factor: 0.5
+    patience: 8
+    min_lr: 0.000001
+  early_stopping:
+    patience: 20
+    monitor: val_loss

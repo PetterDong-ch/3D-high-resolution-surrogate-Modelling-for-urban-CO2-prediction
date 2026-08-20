@@ -1,0 +1,9 @@
+{
+  "out_dir": "/data/cd25/two_stage_surrogate_v6/processed/v40_stage1_met_full_domain_context",
+  "last_epoch": 110,
+  "best_val_loss": 4.455287597840652,
+  "best_delta_r": 0.31017807500951183,
+  "best_hard_delta_r": 0.31951894525602553,
+  "best_sign_accuracy": 0.7924765282598312,
+  "best_pattern_score": 0.4527466306851379
+}

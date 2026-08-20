@@ -1,0 +1,17 @@
+jobs_root: external_data/camden/JOBS
+out_dir: generated/stage1_manifest
+
+# Match the final V40 Camden development domain first. This can be widened once
+# time/grid alignment is verified.
+include_months: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
+patch_shape: [16, 256, 256]
+patch_stride: [16, 256, 256]
+
+# First Stage 1 manifest only covers the low-level block needed by V40's z0=0
+# evaluation. Set to null later to create all vertical blocks.
+z_start_values: [0]
+
+train_fraction: 0.70
+val_fraction: 0.15
+limit_jobs:
